@@ -948,7 +948,7 @@ int TEvaluateRule::Evaluate_Rule(TUMRecord* In, TUMRecord* Out, TUMRecord* RealO
 
             if (rc != 2)
             {
-                if (m_debug_rule && rc != 2 && !D->str.is_empty() && strcmp(S->str.str(), D->str.str()))
+                if (D && m_debug_rule && rc != 2 && !D->str.is_empty() && strcmp(S->str.str(), D->str.str()))
                 {
                     printf("Debug: WARNING: %s%s o:%d t-o:%d s-o:%d: '%s' overwritten with '%s'\n", aCDOut->GetTag(), aCDOut->GetSubfield() ? aCDOut->GetSubfield() : "", aCDOut->GetOccurrenceNumber(), aCDOut->GetTagOccurrenceNumber(), aCDOut->GetSubOccurrenceNumber(), D->str.str(), S->str.str());
                 }
