@@ -1,0 +1,737 @@
+**************************
+**************************
+version 3.17
+
+March 2 2011
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed less than (<) and greater than (>) operators.
+- Fixed less than or equal (<=) and greater than or equal (>=) 
+  operators.
+- Fixed MARC-8 conversion from EACC set to UTF-8.
+- Optimized MARC-8 conversion tables for a slightly smaller size.
+
+**************************
+**************************
+version 3.16
+
+February 14 2011
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed character conversion tables. In some cases the proper
+  conversion was not used due to signed/unsigned comparison.
+- Fixed library automake to not try installing statemanager.h twice.
+
+
+**************************
+**************************
+version 3.15
+
+January 18 2011
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed encoding/decoding of tag, indicators and subfield code 
+  when processing xml files (just in case..).
+- Fixed a memory leak during conversion.
+- Fixed hang when an xml record contained too long leader.
+
+
+**************************
+**************************
+version 3.14
+
+September 28 2010
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Cleaned up error handling and improved the API for errors and warnings.
+- Added an API command to add and remove configuration overrides.
+- Added a warning in rule debug mode when a field is overwritten.
+- Const-correctness in source code.
+- Optimized rule file parsing a bit.
+- Fixed a bug from global conditions where an empty or comment line after
+  #if caused the condition to be applied to the previous rule too.
+- Added XML namespace declarations to XML output.
+- Improved XML entity handling. Now supports numeric entities and won't
+  mess up &apos;.
+- Added a simple optional Win32 DLL wrapper so that USEMARCON can be 
+  loaded as a DLL. The DLL is not built by default.
+- Fixed most (apart from PCRE) warnings regarding 32-bit vs. 64-bit types.
+
+
+**************************
+**************************
+version 3.13
+
+September 4 2009
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Added autodetection of XML input format.
+- Fixed a possible crash when a subfield was moved first with
+  MoveFirst or MoveBefore command.
+- Fixed a possible crash when no fields were found in the input
+  record.
+- Changed the command line executable to return values >= 0
+  (0 is still success) so that error checking would be easier.
+- Fixed a crash when a rule had double concatenation (+ in the
+  beginning and after a condition).
+- Fixed a possible crash when an empty field was found in the input
+  record.
+- Added option ([DEFAULT_STATES] SortRecord=false) to disable
+  sorting of fields.
+- Added SortField command to enable sorting of selected fields when
+  SortRecord=false.
+
+**************************
+**************************
+version 3.12
+
+October 14 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed a crash trying to report an invalid field code while reading
+  in records.
+- Fixed parsing of Then and Else statements with blocks on multiple
+  lines.
+- Fixed concatenation in multiline rules.
+
+**************************
+**************************
+version 3.10
+
+August 29 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed RegReplace with the global flag. It misbehaved after the second
+  iteration.
+- Fixed concatenation (rule starting with +) for multipart rules.
+- Only real errors are now counted when checking the maximum number of
+  errors.
+
+
+**************************
+**************************
+version 3.09
+
+May 21 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed while loops. They may not have run all expected iterations and
+  could lose the field contents.
+- Fixed a crash when trying to report an empty field.
+- Fixed a possible endless loop when outputting MARCXML.
+- Moved applying of macros before any other processing of a rule line
+  making it possible to use macros in macros or global conditions.
+
+
+**************************
+**************************
+version 3.08
+
+April 10 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Changed error handler to state manager to more appropriately describe
+  its function.
+- Fixed setting of record id in state manager overriding the flag of
+  handling of linked fields.
+- Weakened comment designator // so that it won't take effect inside
+  a string.
+- Type and format attributes are written to XML record only if they are
+  not empty.
+
+
+**************************
+**************************
+version 3.07
+
+April 4 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed a possible crash when conversion was done in UTF-8 mode and
+  a record contained invalid characters.
+- Fixed a problem introduced in version 3.06 where e.g.
+  From(ELast('nonexisting string')) would return the whole string.
+
+
+**************************
+**************************
+version 3.06
+
+March 14 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed a couple of possible crashes when rule processing encounters
+  an error.
+- Fixed a possible crash in MoveBefore/MoveAfter.
+- Added 001 field (if any) of the input record to the warning and
+  error messages.
+- Added writing of version number to the error log.
+- Fixed a possible memory leak in case insensitive utf8 string
+  comparison.
+- Try to avoid showing (wrong) progress percentage for files larger
+  than 2GB.
+
+
+**************************
+**************************
+version 3.05
+
+February 27 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed spurious 5006 error messages.
+- Added record number to warning 2602.
+
+
+**************************
+**************************
+version 3.04
+
+February 21 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed setting of input record in second and subsequent calls
+  to Usemarcon->Convert(). API mode only.
+- Fixed trimming of whitespace in the result of To() command.
+
+
+**************************
+**************************
+version 3.03
+
+February 14 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed a one time memory leak in TUMApplication (old bug).
+- Fixed an invalid file write attempt when converting record in
+  a memory buffer (old bug).
+
+
+**************************
+**************************
+version 3.02
+
+February 14 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Updated the accompanying PCRE library to version 7.6.
+- Updated PCRE build instructions to disable pcrecpp (not needed).
+- Fixed USEMARCON program build to link with libpcre instead of
+  libpcrecpp.
+- Fixed a possible bug in trimming of rule lines and removal
+  of CR at end of line.
+
+
+**************************
+**************************
+version 3.01
+
+January 28 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed global conditions.
+- Fixed RegReplaceTable.
+- Added check for unbalanced parenthesis to conditions.
+- Added 'f' option for RegReplaceTable to only do the first
+  matching replace.
+
+
+**************************
+**************************
+version 3.00
+
+January 17 2008
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Cleaned up the interface ("API") to USEMARCON.
+- Cleaned up file name string handling.
+- Cleaned up header file dependencies.
+- Added duplicate field and subfield processing options.
+- Fixed concatenation of a complete field with multiple subfields
+  to a single subfield.
+- Fixed peeking of output record contents (% operator) in a rule that
+  creates a temporary input field.
+- Added possibility to do RegFind in string given as a parameter.
+- Better UTF-8 support using utf8proc library.
+- Added possibility to use simple macros in the rule file.
+- Added RegReplaceTable() function that can be used to replace a list
+  of strings with a short piece of code.
+- Added possibility to split a line to multiple lines using \ in the
+  of the line.
+- Occurrence parameter in NextSub() and PreviousSub() is now optional.
+- Added MoveBefore and MoveAfter to manipulate subfield positions in
+  a field.
+- Added ExistsIn(), NextSubIn() and PreviousSubIn() to check for
+  subfields in S or other string.
+- Fixed rule parser to not get confused over pipe characters embedded
+  in strings.
+- Fixed regular expressions handling to handle escaped characters
+  properly inside square brackets.
+- Added occurrence specifier "newest" that can be used to target the
+  last occurrence of the tag.
+- Switched regular expressions support to use PCRE for added features.
+- Added RegFindPos and RegFindNum.
+- Added left-recursive If statement handling. A branch is no
+  more evaluated unless it matches the condition.
+- Added execution blocks for conditional processing (denoted by curly
+  brackets {}).
+- Added While loops.
+- Added For loops.
+- Combined the documentation to a single document.
+- Added record number to logged error and warning messages.
+- Conversion will now fail if the specified ini file cannot be opened.
+- Added possibility to define minimum version that can be used for the
+  conversion. USEMARCON 3.00 has rule version 300. See #define in the
+  manual for more information.
+- Added possibility to use "global" conditions for a group of rules.
+  See #if in manual for more information.
+
+**************************
+**************************
+version 2.01
+
+August 14 2007
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Fixed initialization of CD's to reset output flag. Fixes spurious
+  errors when trying to access input record.
+- Improved rule debug mode output and made all output go to console.
+
+**************************
+**************************
+version 2.00
+
+August 2 2007
+
+The National Library of Finland
+Ere Maijala
+http://www.nationallibrary.fi/
+ere.maijala at helsinki.fi
+
+- Renewed the core scanner and parser. Parser is now built with bison
+  and converted to C++ by a perl script. Scanner is built with flex in
+  C++ mode. Building of them is currently not part of the regular build
+  process.
+- Fixed conversion of full fields in field order mode.
+- Added NextSub($x, '>=1') and PreviousSub($x, '>=1') to handle subfield
+  occurrences better.
+- Added option to convert all subfield codes to lower case
+  (ConvertSubfieldCodesToLowercase=TRUE in [DEFAULT_STATES] section).
+- Added possibility to use nonbreaking conditionals (just leave 'Then'
+  out from an 'If' clause.
+- Added possibility to make USEMARCON always create a new field:
+  500 | 500(New) | S
+- Fixed concatenation when converting a full field.
+- Fixed using wildcards in subfield codes in field order mode.
+- Added possibility to peek at a converted (output) field by prepending
+  the tag code with % (e.g. If (%008/0-5/ = '123456') Then S).
+- Added regexp support for \s, \S, \w, \W, \d, \D, \b and \B
+  (escape \ in actual rules (e.g. \\s).
+- Fixed sorting of temporary fields to not lose data when using field
+  order.
+- Fixed wildcard handling when converting complete fields.
+- Cleaned up a lot of code and got rid of the huge temporary buffers in
+  ErrorHandler and other static buffers. Record or field size is no
+  more limited.
+- Initial support for MARCXML and MarcXchange records (see documentation
+  for more information).
+- Improved rule syntax error reporting to include the full rule and line
+  number.
+- Added possibility to use wildcards (?) with Exists().
+- Empty indicators no longer cause warnings but are written out as is.
+- Added new function InTable('string', 'filename') that can be used to
+  check if a value exists in a table file.
+  e.g. If (InTable(S, 'table.tbl') Then S; Table('table.tbl')
+
+**************************
+**************************
+version 1.81
+
+November 10 2006
+
+The National Library of Finland
+Ere Maijala
+http://www.kansalliskirjasto.fi/
+ere.maijala at helsinki.fi
+
+- Added possibility to convert incoming records from MARC-8 to UTF-8
+
+**************************
+**************************
+version 1.80
+
+September 27 2006
+
+The National Library of Finland
+Ere Maijala
+http://www.kansalliskirjasto.fi/
+ere.maijala at helsinki.fi
+
+- Updated documentation for new features and revised parts of the old docs.
+- Separated interactive mode from file/buffer mode. Now files are used if
+  buffers are not specified regardless of the mode. Interactive mode
+  controls only whether USEMARCON outputs anything on the console.
+- Added possibility to copy the input to output as the default action in
+  translation tables. This can be accomplished with a magic token COPY in
+  #DEFAULT declaration:
+
+  #DEFAULT | COPY
+
+- Added possibility to use question mark as a wildcard in rules. A question
+  mark can replace any single character in field code or subfield code. For
+  example the following rules would convert all fields as is (it is assumed
+  that 00? are control fields, thus no indicators or subfield codes):
+
+  00? | 00? | S
+  ???I1 | ???I1 | S
+  ???I2 | ???I2 | S
+  ???$? | ???$? | S
+
+- Fixed UTF-8 handling. Now it should finally actually work correctly, but
+  it's still a bit limited in that it cannot handle all non-spacing
+  characters correctly. Now the functions work on complete glypheme clusters
+  (=perceived characters) in the supported ranges.
+
+- Bulletproofed several functions to cope better with broken fields.
+
+- Removed dangerous static declarations from the scanner. It's no more
+  directly recreatable from analyse.l, pending rewrite with better
+  techniques.
+
+**************************
+**************************
+version 1.71
+
+29th March 2006
+
+The National Library of Finland
+Ere Maijala
+http://www.lib.helsinki.fi/
+ere.maijala at helsinki.fi
+
+- Fixed UTF-8 mode to work correctly with 3+ byte entities
+
+**************************
+**************************
+version 1.70
+
+2nd February 2006
+
+The National Library of Finland
+Ere Maijala
+http://www.lib.helsinki.fi/
+ere.maijala at helsinki.fi
+
+- Added support to peeking at the previous contents of the destination field
+  using variable D (requires of course that there is already data in the
+  destination field). This allows for example comparisons between the old
+  and new value and concatenation of old value to the new one.
+- Added experimental support for simple regular expressions. Three new
+  functions are provided:
+  RegFind('expression') returns >= 0 if the expression was found.
+  RegMatch(index) returns matched parts by index (0-9).
+  RegReplace('expression', 'expression') replaces expression by another.
+  \1 \2 etc. can be used to reference the matched parts. Thoroughly untested.
+- Added possibility to do the conversion in field order instead of the classic
+  rule order. In this new mode the record is processed field by field and all
+  matching rules are applied. Enabled by setting ConvertInFieldOrder=TRUE in
+  section DEFAULT_STATES of the ini file.
+- Added possibility to specify the absolute field or subfield index in input
+  or output CD (for example rule "245(1)$a | 240(2)$a | S" would copy $a from
+  first 245 to the second 240 in the destination.
+- Added possibility to use "If Then Translation Else Condition" and
+  "If Then Condition". This allows more complicated conditional rules.
+- Fixed a crash if the destination record doesn't contain any fields.
+- Fixed a hang when UTF-8 mode was active and To command was used.
+- Fixed a problem where transcoding a string with Table command would return
+  only the default value and not the other transcoded parts of the string.
+
+
+**************************
+**************************
+version 1.60
+
+14th October 2005
+
+The National Library of Finland
+Ere Maijala
+http://www.lib.helsinki.fi/
+ere.maijala at helsinki.fi
+
+- Implemented UTF-8 support for Len, From, To, Between and /.../ operators.
+  Enabled by setting UTF8Mode=TRUE in section DEFAULT_STATES of the ini file.
+- Fixed a possible memory overwrite error in
+  TTransFile::Transcode. Patch by DanX, Talis.
+- Fixed a possible memory allocation error in
+  TEvaluateRule::Between. Patch by DanX, Talis.
+- Fixed an error where indicators for a variable width field were not
+  written to the output file if the conversion rules didn't create them
+  correctly.
+- Optimized the search for a specific field so that it would be faster to
+  apply rules for non-existing fields or check if a field exists.
+- Implemented a simple memory pooling to optimize memory allocations
+- Implemented a simple string class to optimize memory allocations and
+  avoid frequent allocations of short strings
+- Removed the line length limit (256 characters) of rule and table files
+- Fixed a crash when the input data contained an empty variable length field
+
+**************************
+**************************
+version 1.51
+
+5th January 2005
+
+Helsinki University Library, the National Library of Finland
+Ere Maijala
+http://www.lib.helsinki.fi/
+ere.maijala at helsinki.fi
+
+- added a directive UpdateOrdinalNumber to control if the
+  OrdinalNumber in the ini file is updated. It's no longer
+  updated by default as the update can cause problems if
+  multiple conversions are done simultaneously.
+
+**************************
+**************************
+version 1.50
+
+7th December 2004
+
+Helsinki University Library, the National Library of Finland
+Ere Maijala
+http://www.lib.helsinki.fi/
+ere.maijala at helsinki.fi
+
+- added some fairly simple Autoconf/Automake magic to ease
+  building on different platforms
+- fixed a memory leak from precedes and follows operations
+- fixed a read of uninitialized memory error
+- fixed a potential memory overwrite error from rule handling
+- fixed a memory leak from ReplaceOcc operation
+- fixed a memory leak from Len operation
+- optimized the code a bit, now the uni2uk conversion is more
+  than 20% faster than before
+- added build command for Microsoft Visual C++ Toolkit 2003
+
+**************************
+**************************
+version 1.44
+
+24th August 2004
+
+ATP Library Systems Ltd, Finland
+http://www.atp.fi
+mailto:usemarcon@atp.fi
+
+- a malformed field with no subfields doesn't cause a crash
+  anymore
+
+**************************
+**************************
+version 1.43
+
+28th July 2004
+
+ATP Library Systems Ltd, Finland
+http://www.atp.fi
+mailto:usemarcon@atp.fi
+
+- fixed a bug which caused a crash or a converted record to
+  be reconverted when running in non-interactive mode
+
+**************************
+**************************
+version 1.42
+
+15th June 2004
+
+ATP Library Systems Ltd, Finland
+http://www.atp.fi
+mailto:usemarcon@atp.fi
+
+- added the possibility to disable character conversion
+- corrected a bug where the non-strict Replace command on a string
+  with only spaces crashed the program
+
+**************************
+**************************
+version 1.41
+
+15th April 2004
+
+ATP Library Systems Ltd, Finland
+http://www.atp.fi
+mailto:usemarcon@atp.fi
+
+- fixed a crash when a control field containing two characters was
+  treated as a data field (thanks to Christopher Dunavant from
+  VTLS for reporting the problem)
+- fixed error messages related to the above crash
+- added command line option -v for verbose mode
+- moved the startup banner and usage text away from the library
+- unified the way USEMARCON is written
+- created MS Visual C++ .NET 2003 project files
+
+**************************
+**************************
+version 1.4
+
+29th August 2003
+
+ATP Library Systems Ltd, Finland
+http://www.atp.fi
+mailto:usemarcon@atp.fi
+
+- fixed situations where the ini file was left open if an error was encountered
+- fixed the file handling to only require input and output files
+- moved the error messages into a header file to avoid the need to locate
+  and load them at startup
+
+
+
+**************************
+**************************
+version 1.3
+
+8th July 2003
+
+ATP Library Systems Ltd, Finland
+http://www.atp.fi
+mailto:usemarcon@atp.fi
+
+We have made some major modifications, fixes and restructuring to
+make USEMARCON more suitable for integration in other software,
+our main targets being on-the-fly conversions in Z39.50 clients and
+multithreaded Z39.50 servers. There are too many changes to list
+them all here, but this document outlines the most important ones.
+
+
+Major Changes
+-------------
+
+* Merged Windows and Linux versions
+
+Windows and Linux versions have been merged into the same source.
+The current source should be easily adaptable to other systems too.
+The ini file handling has been rewritten to be cross platform code. This
+includes updating the ini file (the ordinal number), which now works in
+Linux too.
+
+
+* Elimination of global and static data
+
+The scanner and parser have been regenerated using flex++/bison++
+(Win32 port available at http://http://www.kohsuke.org/flex++bison++/)
+to create C++ classes and avoid global non-reentrant code. Most code
+had to be moved from the parser (Analyse.y) to a child class
+(TEvaluateRule in a new header file lien_not.h). The error
+handler (TError) is now a member of TUMApplication and it is used by
+other classes also. Global temporary buffers have been incorporated
+into the error handler (this is a workaround to avoid allocating them
+in dozens of places).
+
+
+* Better handling of on-the-fly conversions
+
+Input and output files are no longer required if the data is provided
+in a buffer. File names in .ini files can be declared without paths.
+In that case it is assumed that they reside in the same directory as
+the .ini file itself. Error log is not created if the file name is
+empty.
+
+
+* Elimination of all known memory leaks
+
+All detected memory leaks have been fixed.
+
+
+* Command line enhancements
+
+Input and output files can now be specified on the command line
+overriding the ini file settings. This makes it possible to, for example,
+run conversion for a batch of files.
+
+
+* A bunch of miscellaneous bug fixes
+
+During the modification and testing phases, multiple bugs from minor
+to severe (crash-producing) ones were discovered and fixed.
+
+
+* Non-functional code restructuring for better readability
+
+Most source files have been restructured to fix the different
+indentation errors and styles. Some ugly things will remain, but the
+overall readability has been improved.
